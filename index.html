@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSJ MOSTAKIM | Cybersecurity Professional & Penetration Tester</title>
+    <meta name="description" content="Portfolio of Md. Siddik Jaman Mostakim (MSJ MOSTAKIM) - Jr. Penetration Tester focused on Web Application Security, VAPT, API Security, and Security Research.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#04070d',
+                            surface: '#090e17',
+                            card: 'rgba(13, 20, 33, 0.75)',
+                            border: 'rgba(0, 240, 255, 0.15)',
+                            cyan: '#00f0ff',
+                            blue: '#0070f3',
+                            violet: '#7000ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark Mode Grid & Styles */
+        .dark body {
+            background-color: #04070d;
+            color: #94a3b8;
+        }
+        .dark .cyber-grid {
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+        .dark .glass-panel {
+            background: rgba(9, 14, 23, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+        .dark .text-main { color: #ffffff; }
+        .dark .text-sub { color: #cbd5e1; }
+        .dark .text-muted { color: #64748b; }
+        .dark .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .dark .btn-secondary:hover {
+            background-color: rgba(0, 240, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.4);
+            color: #00f0ff;
+        }
+
+        /* High-Contrast Light Mode Styling */
+        html:not(.dark) body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+        html:not(.dark) .cyber-grid {
+            background-image: 
+                linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+        html:not(.dark) .glass-panel {
+            background: #ffffff;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+        }
+        html:not(.dark) .text-main { color: #0f172a !important; }
+        html:not(.dark) .text-sub { color: #334155 !important; }
+        html:not(.dark) .text-muted { color: #475569 !important; }
+        
+        /* Light Mode Specific Buttons */
+        html:not(.dark) .btn-secondary {
+            background-color: #ffffff;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        html:not(.dark) .btn-secondary:hover {
+            background-color: #0070f3;
+            color: #ffffff;
+            border-color: #0070f3;
+        }
+
+        html:not(.dark) .bg-cyber-surface\/40,
+        html:not(.dark) .bg-cyber-surface\/60 {
+            background-color: rgba(248, 250, 252, 0.8) !important;
+        }
+
+        /* 3D Canvas Background in Light Mode */
+        html:not(.dark) #canvas-card {
+            background-color: #0f172a !important;
+            border-color: #0070f3 !important;
+        }
+
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(0, 240, 255, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.2);
+        }
+        html:not(.dark) .glass-panel-hover:hover {
+            border-color: #0070f3;
+            box-shadow: 0 10px 25px -5px rgba(0, 112, 243, 0.15);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #0070f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        html:not(.dark) .text-gradient {
+            background: linear-gradient(135deg, #0070f3 0%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #04070d; }
+        html:not(.dark) ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+    </style>
+</head>
+<body class="cyber-grid relative min-h-screen selection:bg-cyber-cyan selection:text-black">
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="glass-panel rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
+                
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-2">
+                    <div class="w-9 h-9 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/40 flex items-center justify-center">
+                        <span class="font-mono text-cyber-cyan font-bold text-lg">M</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-mono font-bold tracking-wider text-main text-base">MSJ<span class="text-cyber-cyan">.</span></span>
+                        <span class="text-[9px] text-sub tracking-widest font-mono uppercase -mt-1">MOSTAKIM</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center space-x-6 text-xs font-mono font-semibold tracking-wider text-sub">
+                    <a href="#home" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_home">HOME</a>
+                    <a href="#about" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_about">ABOUT</a>
+                    <a href="#security" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_security">SECURITY</a>
+                    <a href="#skills" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_skills">SKILLS</a>
+                    <a href="#experience" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_exp">EXPERIENCE</a>
+                    <a href="#projects" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_projects">PROJECTS</a>
+                    <a href="#writeups" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_writeups">WRITEUPS</a>
+                    <a href="#contact" class="hover:text-cyber-cyan transition-colors" data-i18n="nav_contact">CONTACT</a>
+                </div>
+
+                <!-- Controls: Language, Theme Toggle, CV Button -->
+                <div class="flex items-center space-x-3">
+                    
+                    <!-- Language Selector Switch -->
+                    <button id="lang-toggle" class="flex items-center space-x-1 bg-cyber-cyan/10 border border-cyber-cyan/40 text-cyber-cyan dark:text-cyber-cyan dark:bg-cyber-cyan/10 px-3 py-1.5 rounded-xl font-mono text-xs font-bold hover:bg-cyber-cyan/20 transition-all shadow-sm">
+                        <i data-lucide="languages" class="w-3.5 h-3.5"></i>
+                        <span id="lang-label">BN</span>
+                    </button>
+
+                    <!-- Theme Toggle (Dark / Light) -->
+                    <button id="theme-toggle" class="p-2 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-cyber-cyan hover:bg-slate-300 dark:hover:bg-white/10 transition-all" title="Toggle Theme">
+                        <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+                    </button>
+
+                    <!-- CV Button -->
+                    <a href="assets/CV_Of_Md_Siddik_Jaman_Mostakim.pdf" target="_blank" class="hidden sm:inline-flex items-center space-x-2 bg-cyber-blue text-white dark:bg-cyber-cyan/10 dark:text-cyber-cyan border border-cyber-blue dark:border-cyber-cyan/40 px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all hover:opacity-90">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                        <span data-i18n="cv_btn">DOWNLOAD CV</span>
+                    </a>
+
+                    <!-- Mobile Menu Toggle Button -->
+                    <button id="menu-btn" class="lg:hidden text-main focus:outline-none p-1.5 rounded-lg bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Mobile Nav Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden max-w-7xl mx-auto px-4 mt-2">
+            <div class="glass-panel rounded-2xl p-5 flex flex-col space-y-3 text-sm font-mono border-cyber-cyan/30">
+                <a href="#home" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_home"># HOME</a>
+                <a href="#about" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_about"># ABOUT</a>
+                <a href="#security" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_security"># SECURITY</a>
+                <a href="#skills" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_skills"># SKILLS</a>
+                <a href="#experience" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_exp"># EXPERIENCE</a>
+                <a href="#projects" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_projects"># PROJECTS</a>
+                <a href="#writeups" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_writeups"># WRITEUPS</a>
+                <a href="#contact" class="mobile-link text-sub hover:text-cyber-cyan py-1" data-i18n="nav_contact"># CONTACT</a>
+                <a href="assets/CV_Of_Md_Siddik_Jaman_Mostakim.pdf" target="_blank" class="flex items-center justify-center space-x-2 bg-cyber-blue text-white dark:bg-cyber-cyan/10 dark:text-cyber-cyan border border-cyber-blue dark:border-cyber-cyan/40 py-2.5 rounded-xl font-mono text-xs font-bold mt-2">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span data-i18n="cv_btn">DOWNLOAD CV</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                
+                <!-- Hero Left Column -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center space-x-2 bg-cyber-cyan/15 dark:bg-cyber-cyan/10 border border-cyber-cyan/50 px-3.5 py-1.5 rounded-full shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyber-blue dark:bg-cyber-cyan animate-pulse"></span>
+                        <span class="font-mono text-[11px] sm:text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-wider uppercase" data-i18n="hero_status">AVAILABLE FOR PROFESSIONAL OPPORTUNITIES</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h1 class="text-3xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-main uppercase leading-none">
+                            CYBERSECURITY <br>
+                            <span class="text-gradient" data-i18n="hero_title_sub">WITH INTENT.</span>
+                        </h1>
+                    </div>
+
+                    <p class="text-sm sm:text-base text-sub max-w-2xl font-medium leading-relaxed" data-i18n="hero_desc">
+                        I'm Md. Siddik Jaman Mostakim, a Jr. Penetration Tester focused on Web Application Security, VAPT, API Security and Security Research.
+                    </p>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="assets/CV_Of_Md_Siddik_Jaman_Mostakim.pdf" target="_blank" class="flex items-center space-x-2 bg-cyber-blue text-white dark:bg-gradient-to-r dark:from-cyber-cyan/20 dark:to-cyber-blue/20 hover:opacity-90 dark:hover:from-cyber-cyan/30 dark:hover:to-cyber-blue/30 border border-cyber-blue dark:border-cyber-cyan/50 px-5 py-3 rounded-xl font-mono text-xs font-bold tracking-wider transition-all shadow-md">
+                            <i data-lucide="file-text" class="w-4 h-4 text-white dark:text-cyber-cyan"></i>
+                            <span data-i18n="btn_cv">VIEW MY CV</span>
+                        </a>
+                        <a href="https://github.com/mdsiddikjamanmostakim" target="_blank" rel="noopener" class="flex items-center space-x-2 btn-secondary px-5 py-3 rounded-xl font-mono text-xs font-bold tracking-wider transition-all">
+                            <i data-lucide="github" class="w-4 h-4 text-cyber-blue dark:text-cyber-cyan"></i>
+                            <span>VIEW GITHUB</span>
+                        </a>
+                        <a href="#contact" class="flex items-center space-x-2 btn-secondary px-5 py-3 rounded-xl font-mono text-xs font-bold tracking-wider transition-all">
+                            <i data-lucide="send" class="w-4 h-4 text-cyber-blue dark:text-cyber-cyan"></i>
+                            <span data-i18n="btn_connect">LET'S CONNECT</span>
+                        </a>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-300 dark:border-white/10 flex flex-wrap items-center gap-3 font-mono text-xs text-sub font-semibold">
+                        <span class="text-cyber-blue dark:text-cyber-cyan font-bold">Byte Capsule IT</span>
+                        <span>•</span>
+                        <span>Web Security</span>
+                        <span>•</span>
+                        <span>VAPT</span>
+                        <span>•</span>
+                        <span>Security Research</span>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column (Clean 3D Canvas) -->
+                <div id="canvas-card" class="lg:col-span-5 h-[350px] sm:h-[450px] relative rounded-3xl overflow-hidden glass-panel border border-cyber-cyan/30 shadow-xl flex items-center justify-center">
+                    <div id="canvas-container"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative border-t border-slate-300 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase" data-i18n="about_tag">// PHILOSOPHY</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-main tracking-tight uppercase leading-tight">
+                        CURIOUS.<br>
+                        TECHNICAL.<br>
+                        <span class="text-gradient">RESPONSIBLE.</span>
+                    </h2>
+                    <div class="p-4 rounded-xl glass-panel border-l-4 border-l-cyber-blue dark:border-l-cyber-cyan text-xs sm:text-sm font-mono text-sub font-semibold">
+                        "Think Like an Attacker. Secure Like a Defender."
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-5 text-sub font-normal leading-relaxed text-sm sm:text-base">
+                    <p data-i18n="about_p1">
+                        I work on authorized security testing and vulnerability assessment, with a growing focus on web applications, APIs and practical security research.
+                    </p>
+                    <p data-i18n="about_p2">
+                        My approach is simple: understand how a system works, identify meaningful attack surfaces, validate findings responsibly, and communicate remediation clearly.
+                    </p>
+
+                    <!-- Feature Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 font-mono">
+                        <div class="p-4 rounded-2xl glass-panel glass-panel-hover">
+                            <div class="text-cyber-blue dark:text-cyber-cyan font-bold text-lg mb-1">WEB</div>
+                            <div class="text-xs text-main font-bold">Application Security</div>
+                            <div class="text-[11px] text-muted font-medium mt-1">VAPT & Security Testing</div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl glass-panel glass-panel-hover">
+                            <div class="text-cyber-blue dark:text-cyber-cyan font-bold text-lg mb-1">LINUX</div>
+                            <div class="text-xs text-main font-bold">Security & Operations</div>
+                            <div class="text-[11px] text-muted font-medium mt-1">Diagnostics & Hardening</div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl glass-panel glass-panel-hover">
+                            <div class="text-cyber-blue dark:text-cyber-cyan font-bold text-lg mb-1">PYTHON</div>
+                            <div class="text-xs text-main font-bold">Security Automation</div>
+                            <div class="text-[11px] text-muted font-medium mt-1">Scripting & Tooling</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Expertise Section -->
+    <section id="security" class="py-20 relative border-t border-slate-300 dark:border-white/5 bg-cyber-surface/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-2">
+                <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase" data-i18n="sec_tag">// CORE DOMAINS</div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-main tracking-tight uppercase" data-i18n="sec_title">
+                    SECURITY, FROM THE SURFACE <span class="text-gradient">TO THE CORE.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 01 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="font-mono text-3xl font-bold text-cyber-blue/40 dark:text-cyber-cyan/40">01</span>
+                            <div class="w-10 h-10 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/40 flex items-center justify-center text-cyber-blue dark:text-cyber-cyan">
+                                <i data-lucide="globe" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-main tracking-wide" data-i18n="card1_title">01 — WEB APPLICATION SECURITY</h3>
+                        <ul class="space-y-2 font-mono text-xs text-sub font-medium">
+                            <li>• Authentication</li>
+                            <li>• Authorization</li>
+                            <li>• Session Security</li>
+                            <li>• Input Validation</li>
+                            <li>• Access Control</li>
+                            <li>• OWASP Risks</li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-2">
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">OWASP</span>
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">HTTP</span>
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">Burp Suite</span>
+                    </div>
+                </div>
+
+                <!-- Card 02 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="font-mono text-3xl font-bold text-cyber-blue/40 dark:text-cyber-cyan/40">02</span>
+                            <div class="w-10 h-10 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/40 flex items-center justify-center text-cyber-blue dark:text-cyber-cyan">
+                                <i data-lucide="terminal" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-main tracking-wide" data-i18n="card2_title">02 — PENETRATION TESTING</h3>
+                        <ul class="space-y-2 font-mono text-xs text-sub font-medium">
+                            <li>• Reconnaissance</li>
+                            <li>• Enumeration</li>
+                            <li>• Vulnerability Assessment</li>
+                            <li>• Controlled Validation</li>
+                            <li>• Technical Reporting</li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-2">
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">Nmap</span>
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">Wireshark</span>
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">Linux</span>
+                    </div>
+                </div>
+
+                <!-- Card 03 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="font-mono text-3xl font-bold text-cyber-blue/40 dark:text-cyber-cyan/40">03</span>
+                            <div class="w-10 h-10 rounded-xl bg-cyber-cyan/15 border border-cyber-cyan/40 flex items-center justify-center text-cyber-blue dark:text-cyber-cyan">
+                                <i data-lucide="cpu" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-main tracking-wide" data-i18n="card3_title">03 — SECURITY RESEARCH</h3>
+                        <ul class="space-y-2 font-mono text-xs text-sub font-medium">
+                            <li>• Vulnerability Research</li>
+                            <li>• Attack Techniques</li>
+                            <li>• Security Controls</li>
+                            <li>• API Security</li>
+                            <li>• Security Automation</li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-200 dark:border-white/10 flex flex-wrap gap-2">
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">Python</span>
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">APIs</span>
+                        <span class="font-mono text-[10px] bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">Research</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="py-20 relative border-t border-slate-300 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase">// ECOSYSTEM</div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-main tracking-tight uppercase mt-1" data-i18n="skills_title">
+                    TECHNICAL <span class="text-gradient">SKILLS.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cybersecurity -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i data-lucide="shield" class="w-5 h-5 text-cyber-blue dark:text-cyber-cyan"></i>
+                        <h3 class="font-mono text-sm font-bold text-main">Cybersecurity</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Penetration Testing</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Web Application Security</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">VAPT</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Vulnerability Assessment</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Network Security</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Security Research</span>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i data-lucide="wrench" class="w-5 h-5 text-cyber-blue dark:text-cyber-cyan"></i>
+                        <h3 class="font-mono text-sm font-bold text-main">Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Nmap</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Wireshark</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Burp Suite</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Linux Security Tools</span>
+                    </div>
+                </div>
+
+                <!-- Programming -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i data-lucide="code" class="w-5 h-5 text-cyber-blue dark:text-cyber-cyan"></i>
+                        <h3 class="font-mono text-sm font-bold text-main">Programming</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan border border-cyber-cyan/40 font-mono text-xs font-bold">Python</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Java</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">C</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Web -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i data-lucide="layout" class="w-5 h-5 text-cyber-blue dark:text-cyber-cyan"></i>
+                        <h3 class="font-mono text-sm font-bold text-main">Web</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">HTML</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">CSS</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Bootstrap</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">ReactJS</span>
+                    </div>
+                </div>
+
+                <!-- Systems -->
+                <div class="glass-panel p-6 rounded-2xl md:col-span-2 lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i data-lucide="server" class="w-5 h-5 text-cyber-blue dark:text-cyber-cyan"></i>
+                        <h3 class="font-mono text-sm font-bold text-main">Systems & Networking</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Linux</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Windows</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">TCP/IP</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 text-sub border border-slate-300 dark:border-white/10 font-mono text-xs font-medium">Network Troubleshooting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 relative border-t border-slate-300 dark:border-white/5 bg-cyber-surface/40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase">// CAREER</div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-main tracking-tight uppercase mt-1" data-i18n="exp_title">
+                    PROFESSIONAL <span class="text-gradient">EXPERIENCE.</span>
+                </h2>
+            </div>
+
+            <!-- Structured Timeline Container -->
+            <div class="relative border-l-2 border-cyber-blue dark:border-cyber-cyan/30 ml-4 sm:ml-8 space-y-10 pl-6 sm:pl-10">
+
+                <!-- Timeline Item 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1 w-4 h-4 rounded-full bg-white dark:bg-cyber-bg border-2 border-cyber-blue dark:border-cyber-cyan shadow-[0_0_10px_#0070f3] dark:shadow-[0_0_10px_#00f0ff]"></div>
+                    
+                    <div class="glass-panel glass-panel-hover p-6 rounded-2xl space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
+                            <div>
+                                <span class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold block mb-1">SEP 2026 — PRESENT</span>
+                                <h3 class="text-lg sm:text-xl font-bold text-main">Jr. Penetration Tester</h3>
+                            </div>
+                            <span class="font-mono text-xs bg-cyber-cyan/15 text-cyber-blue dark:text-cyber-cyan px-3 py-1 rounded-full border border-cyber-cyan/40 font-bold">
+                                Byte Capsule IT
+                            </span>
+                        </div>
+                        
+                        <p class="text-xs font-mono text-muted font-bold" data-i18n="exp_resp">Responsibilities:</p>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-sub font-mono font-medium">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-cyber-blue dark:text-cyber-cyan font-bold">▸</span>
+                                <span>Authorized web application penetration testing</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-cyber-blue dark:text-cyber-cyan font-bold">▸</span>
+                                <span>Network and system security testing</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-cyber-blue dark:text-cyber-cyan font-bold">▸</span>
+                                <span>Reconnaissance and enumeration</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-cyber-blue dark:text-cyber-cyan font-bold">▸</span>
+                                <span>Vulnerability assessment</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-cyber-blue dark:text-cyber-cyan font-bold">▸</span>
+                                <span>Security research</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-cyber-blue dark:text-cyber-cyan font-bold">▸</span>
+                                <span>Technical documentation & Reporting</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1 w-4 h-4 rounded-full bg-white dark:bg-cyber-bg border-2 border-slate-400 dark:border-gray-500"></div>
+                    
+                    <div class="glass-panel p-6 rounded-2xl space-y-3">
+                        <div class="border-b border-slate-200 dark:border-white/10 pb-3">
+                            <span class="font-mono text-xs text-muted font-bold block mb-1">TECHNICAL BACKGROUND</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-main">Computer Operator / Technical Professional</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Computer operations</span>
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Troubleshooting</span>
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Software/system setup</span>
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Hardware support</span>
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Web technologies</span>
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Graphic design</span>
+                            <span class="bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 px-2.5 py-1 rounded-lg text-sub font-medium">Digital-device support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1 w-4 h-4 rounded-full bg-white dark:bg-cyber-bg border-2 border-slate-400 dark:border-gray-500"></div>
+                    
+                    <div class="glass-panel p-6 rounded-2xl space-y-3">
+                        <div class="border-b border-slate-200 dark:border-white/10 pb-3">
+                            <span class="font-mono text-xs text-muted font-bold block mb-1">TEACHING</span>
+                            <h3 class="text-lg sm:text-xl font-bold text-main">ICT & Python Programming Instructor</h3>
+                        </div>
+                        <p class="text-xs text-sub font-mono font-medium">
+                            ICT fundamentals • Python programming • Practical beginner-friendly instruction
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative border-t border-slate-300 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase">// PORTFOLIO</div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-main tracking-tight uppercase mt-1" data-i18n="proj_title">
+                    FEATURED <span class="text-gradient">PROJECTS.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl p-6 flex flex-col justify-between border border-cyber-cyan/40">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-mono text-[10px] bg-cyber-cyan/20 text-cyber-blue dark:text-cyber-cyan font-bold px-2.5 py-1 rounded-md border border-cyber-cyan/40">FEATURED REPO</span>
+                            <i data-lucide="folder-git-2" class="w-5 h-5 text-cyber-blue dark:text-cyber-cyan"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-main">PENTESTING NOTES</h3>
+                        <p class="text-xs text-sub font-mono font-medium leading-relaxed">
+                            Practical penetration testing notes, methodologies, tools and cybersecurity learning resources.
+                        </p>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">
+                        <span class="font-mono text-[11px] text-muted font-semibold">Documentation</span>
+                        <a href="https://github.com/msjmostakim/pentesting-notes" target="_blank" rel="noopener" class="text-cyber-blue dark:text-cyber-cyan hover:underline font-mono text-xs font-bold">View Repo →</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-panel rounded-3xl p-6 flex flex-col justify-between opacity-85">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-mono text-[10px] bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold px-2.5 py-1 rounded-md border border-amber-500/30">COMING SOON</span>
+                            <i data-lucide="compass" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-main">RECONNAISSANCE LAB</h3>
+                        <p class="text-xs text-sub font-mono font-medium leading-relaxed">
+                            Hands-on reconnaissance and enumeration learning environment.
+                        </p>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-200 dark:border-white/10 font-mono text-[11px] text-muted font-bold">In Development</div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-panel rounded-3xl p-6 flex flex-col justify-between opacity-85">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-mono text-[10px] bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold px-2.5 py-1 rounded-md border border-amber-500/30">COMING SOON</span>
+                            <i data-lucide="cpu" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-main">SECURITY RESEARCH</h3>
+                        <p class="text-xs text-sub font-mono font-medium leading-relaxed">
+                            Future vulnerability research, security experiments and technical writeups.
+                        </p>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-200 dark:border-white/10 font-mono text-[11px] text-muted font-bold">In Planning</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writeups Section -->
+    <section id="writeups" class="py-20 relative border-t border-slate-300 dark:border-white/5 bg-cyber-surface/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase">// RESEARCH</div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-main tracking-tight uppercase mt-1" data-i18n="writeups_title">
+                    SECURITY <span class="text-gradient">WRITEUPS.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-mono text-[10px] text-cyber-blue dark:text-cyber-cyan bg-cyber-cyan/15 font-bold px-2 py-0.5 rounded">WEB SECURITY</span>
+                        <span class="font-mono text-[10px] text-amber-600 dark:text-amber-400 bg-amber-500/10 font-bold px-2 py-0.5 rounded">COMING SOON</span>
+                    </div>
+                    <h3 class="text-base font-bold text-main mb-2">Web Application Security Research</h3>
+                    <p class="text-xs text-sub font-mono font-medium mb-4">Detailed analysis on web application vulnerabilities.</p>
+                    <span class="text-xs font-mono text-muted font-semibold">Read More →</span>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-mono text-[10px] text-cyber-blue dark:text-cyber-cyan bg-cyber-cyan/15 font-bold px-2 py-0.5 rounded">API SECURITY</span>
+                        <span class="font-mono text-[10px] text-amber-600 dark:text-amber-400 bg-amber-500/10 font-bold px-2 py-0.5 rounded">COMING SOON</span>
+                    </div>
+                    <h3 class="text-base font-bold text-main mb-2">API Security & Access Control</h3>
+                    <p class="text-xs text-sub font-mono font-medium mb-4">Investigating broken object level authorization.</p>
+                    <span class="text-xs font-mono text-muted font-semibold">Read More →</span>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-mono text-[10px] text-cyber-blue dark:text-cyber-cyan bg-cyber-cyan/15 font-bold px-2 py-0.5 rounded">RECONNAISSANCE</span>
+                        <span class="font-mono text-[10px] text-amber-600 dark:text-amber-400 bg-amber-500/10 font-bold px-2 py-0.5 rounded">COMING SOON</span>
+                    </div>
+                    <h3 class="text-base font-bold text-main mb-2">Recon & Attack Surface Enumeration</h3>
+                    <p class="text-xs text-sub font-mono font-medium mb-4">Systematic approach to information gathering.</p>
+                    <span class="text-xs font-mono text-muted font-semibold">Read More →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section class="py-16 relative border-t border-slate-300 dark:border-white/5">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-cyber-cyan/40 text-center shadow-lg">
+                <div class="space-y-4">
+                    <div class="font-mono text-xs text-cyber-blue dark:text-cyber-cyan font-bold tracking-widest uppercase">// CURRICULUM VITAE</div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-main uppercase" data-i18n="cv_head">MY PROFESSIONAL PROFILE</h2>
+                    <p class="text-sub text-xs sm:text-sm max-w-xl mx-auto font-mono font-medium" data-i18n="cv_desc">
+                        Download my latest one-page cybersecurity CV.
+                    </p>
+                    <div class="pt-2">
+                        <a href="assets/CV_Of_Md_Siddik_Jaman_Mostakim.pdf" target="_blank" class="inline-flex items-center space-x-2 bg-cyber-blue text-white dark:bg-cyber-cyan dark:text-black px-6 py-3 rounded-xl font-mono text-xs font-bold tracking-wider hover:opacity-90 transition-all shadow-md">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                            <span>VIEW CV PDF →</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with Vector SVG Icons on All Cards -->
+    <section id="contact" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-12 space-y-3">
+            <h2 class="text-3xl font-bold font-mono text-cyan-400">LET'S CONNECT</h2>
+            <p class="text-slate-400 light:text-slate-600 text-sm" data-en="For cybersecurity opportunities, authorized security testing, collaboration or professional communication." data-bn="সাইবার সিকিউরিটি সুযোগ, অনুমোদিত সিকিউরিটি টেস্টিং বা যেকোনো পেশাদার যোগাযোগের জন্য যোগাযোগ করুন।">
+                For cybersecurity opportunities, authorized security testing, collaboration or professional communication.
+            </p>
+        </div>
+
+        <!-- Contact Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
+            
+            <!-- Phone -->
+            <a href="tel:01301115631" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-cyan-500/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">PHONE</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">01301115631</div>
+                </div>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/8801301115631" target="_blank" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-emerald-500/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-black transition">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">WHATSAPP</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">01301115631</div>
+                </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:mdsiddikjamanmostakim@gmail.com" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-cyan-500/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div class="truncate">
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">EMAIL</div>
+                    <div class="font-bold dark:text-white light:text-slate-800 truncate">mdsiddikjaman...</div>
+                </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/mdsiddikjamanmostakim/" target="_blank" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-blue-500/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-black transition">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">LINKEDIN</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">@md-siddik-jaman...</div>
+                </div>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/mdsiddikjamanmostakim" target="_blank" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-purple-500/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-purple-500/10 text-purple-400 group-hover:bg-purple-500 group-hover:text-black transition">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">GITHUB</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">@mdsiddikjaman...</div>
+                </div>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/mdsiddikjamanmostakim" target="_blank" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-cyan-400/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-cyan-400/10 text-cyan-400 group-hover:bg-cyan-400 group-hover:text-black transition">
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">TELEGRAM</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">@mdsiddikjaman...</div>
+                </div>
+            </a>
+
+            <!-- Twitter / X -->
+            <a href="https://x.com/msjmostakim" target="_blank" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-slate-400/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-slate-500/10 text-slate-300 group-hover:bg-slate-300 group-hover:text-black transition">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">TWITTER / X</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">@msjmostakim</div>
+                </div>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/mdsiddikjamanmostakim/" target="_blank" class="p-4 rounded-xl bg-[#0a101d] dark:bg-[#0a101d] light:bg-white border border-[#15233e] dark:border-[#15233e] light:border-slate-200 hover:border-blue-600/50 transition flex items-center gap-3 group">
+                <div class="p-3 rounded-lg bg-blue-600/10 text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition">
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-slate-500 light:text-slate-400 text-[10px]">FACEBOOK</div>
+                    <div class="font-bold dark:text-white light:text-slate-800">@mdsiddikjaman...</div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-300 dark:border-white/5 font-mono text-xs text-muted font-semibold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                © 2026 MSJ Mostakim. All rights reserved.
+            </div>
+            <div class="text-cyber-blue dark:text-cyber-cyan font-bold">
+                FIND. UNDERSTAND. SECURE.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lucide Icons Init
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+        }
+
+        // Dark / Light Theme Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+            lucide.createIcons();
+        });
+
+        // English & Bangla Dictionary
+        const i18n = {
+            en: {
+                nav_home: "HOME",
+                nav_about: "ABOUT",
+                nav_security: "SECURITY",
+                nav_skills: "SKILLS",
+                nav_exp: "EXPERIENCE",
+                nav_projects: "PROJECTS",
+                nav_writeups: "WRITEUPS",
+                nav_contact: "CONTACT",
+                cv_btn: "DOWNLOAD CV",
+                hero_status: "AVAILABLE FOR PROFESSIONAL OPPORTUNITIES",
+                hero_title_sub: "WITH INTENT.",
+                hero_desc: "I'm Md. Siddik Jaman Mostakim, a Jr. Penetration Tester focused on Web Application Security, VAPT, API Security and Security Research.",
+                btn_cv: "VIEW MY CV",
+                btn_connect: "LET'S CONNECT",
+                about_tag: "// PHILOSOPHY",
+                about_p1: "I work on authorized security testing and vulnerability assessment, with a growing focus on web applications, APIs and practical security research.",
+                about_p2: "My approach is simple: understand how a system works, identify meaningful attack surfaces, validate findings responsibly, and communicate remediation clearly.",
+                sec_tag: "// CORE DOMAINS",
+                sec_title: "SECURITY, FROM THE SURFACE TO THE CORE.",
+                card1_title: "01 — WEB APPLICATION SECURITY",
+                card2_title: "02 — PENETRATION TESTING",
+                card3_title: "03 — SECURITY RESEARCH",
+                skills_title: "TECHNICAL SKILLS.",
+                exp_title: "PROFESSIONAL EXPERIENCE.",
+                exp_resp: "Responsibilities:",
+                proj_title: "FEATURED PROJECTS.",
+                writeups_title: "SECURITY WRITEUPS.",
+                cv_head: "MY PROFESSIONAL PROFILE",
+                cv_desc: "Download my latest one-page cybersecurity CV.",
+                contact_title: "LET'S CONNECT.",
+                contact_desc: "For cybersecurity opportunities, authorized security testing, collaboration or professional communication."
+            },
+            bn: {
+                nav_home: "হোম",
+                nav_about: "সম্পর্কে",
+                nav_security: "সিকিউরিটি",
+                nav_skills: "দক্ষতা",
+                nav_exp: "অভিজ্ঞতা",
+                nav_projects: "প্রজেক্ট",
+                nav_writeups: "রাইটআপস",
+                nav_contact: "যোগাযোগ",
+                cv_btn: "সিভি ডাউনলোড",
+                hero_status: "পেশাদার কাজের জন্য উপলব্ধ",
+                hero_title_sub: "উদ্দেশ্যমূলক সিকিউরিটি।",
+                hero_desc: "আমি মোঃ সিদ্দিক জামান মোস্তাকিম, জুনিয়র পেনেট্রেশন টেস্টেব ওয়েব অ্যাপ্লিকেশন সিকিউরিটি, VAPT, API সিকিউরিটি এবং সিকিউরিটি রিসার্চ নিয়ে কাজ করছি।",
+                btn_cv: "সিভি দেখুন",
+                btn_connect: "যোগাযোগ করুন",
+                about_tag: "// মূল দর্শন",
+                about_p1: "আমি অনুমোদিত সিকিউরিটি টেস্টিং এবং ভলনারেবিলিটি অ্যাসেসমেন্ট নিয়ে কাজ করি। আমার মূল ফোকাস ওয়েবাস্ক ও এপিআই সিকিউরিটি।",
+                about_p2: "আমার কাজের ধারা সহজ: সিস্টেমের গঠন বোঝা, ঝুঁকি চিহ্নিত করা এবং দায়িত্বশীলভাবে সমাধানের পথ দেখানো।",
+                sec_tag: "// মূল ক্ষেত্রসমূহ",
+                sec_title: "সিকিউরিটি, সারফেস থেকে কোর পর্যন্ত।",
+                card1_title: "০১ — ওয়েব অ্যাপ্লিকেশন সিকিউরিটি",
+                card2_title: "০২ — পেনেট্রেশন টেস্টিং",
+                card3_title: "০৩ — সিকিউরিটি রিসার্চ",
+                skills_title: "কারিগরি দক্ষতা।",
+                exp_title: "পেশাদার অভিজ্ঞতা।",
+                exp_resp: "দায়িত্বসমূহ:",
+                proj_title: "বিশেষ প্রজেক্টসমূহ।",
+                writeups_title: "সিকিউরিটি রাইটআপস।",
+                cv_head: "পেশাদার প্রোফাইল",
+                cv_desc: "আমার সাম্প্রতিক এক পেজের সিকিউরিটি সিভি ডাউনলোড করুন।",
+                contact_title: "যোগাযোগ করুন।",
+                contact_desc: "সাইবার সিকিউরিটি সুযোগ, সিকিউরিটি টেস্টিং বা যেকোনো পেশাদার যোগাযোগের জন্য বার্তা পাঠান।"
+            }
+        };
+
+        let currentLang = 'en';
+        const langToggleBtn = document.getElementById('lang-toggle');
+        const langLabel = document.getElementById('lang-label');
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'bn' : 'en';
+            langLabel.textContent = currentLang === 'en' ? 'BN' : 'EN';
+
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    elem.textContent = i18n[currentLang][key];
+                }
+            });
+        });
+
+        // 3D Interactive Cyber Core Simulation
+        window.onload = function() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 6;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const mainGroup = new THREE.Group();
+            scene.add(mainGroup);
+
+            // Core Geometric Mesh
+            const coreGeometry = new THREE.IcosahedronGeometry(1.2, 1);
+            const coreMaterial = new THREE.MeshBasicMaterial({
+                color: 0x00f0ff,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.85
+            });
+            const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+            mainGroup.add(coreMesh);
+
+            // Outer Security Ring 1
+            const ring1Geo = new THREE.TorusGeometry(2.0, 0.015, 16, 100);
+            const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x0070f3, transparent: true, opacity: 0.6 });
+            const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+            ring1.rotation.x = Math.PI / 3;
+            mainGroup.add(ring1);
+
+            // Outer Security Ring 2
+            const ring2Geo = new THREE.TorusGeometry(2.4, 0.012, 16, 100);
+            const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, transparent: true, opacity: 0.4 });
+            const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+            ring2.rotation.y = Math.PI / 4;
+            mainGroup.add(ring2);
+
+            // Orbit Particles
+            const particleCount = 100;
+            const particlesGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 6;
+                positions[i + 1] = (Math.random() - 0.5) * 6;
+                positions[i + 2] = (Math.random() - 0.5) * 6;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const particleMaterial = new THREE.PointsMaterial({ color: 0x00f0ff, size: 0.035, transparent: true, opacity: 0.7 });
+            const particleSystem = new THREE.Points(particlesGeometry, particleMaterial);
+            mainGroup.add(particleSystem);
+
+            // Responsive Canvas Resize
+            window.addEventListener('resize', () => {
+                if (!container) return;
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+
+            // Smooth Loop Animation
+            function animate() {
+                requestAnimationFrame(animate);
+
+                coreMesh.rotation.y += 0.005;
+                coreMesh.rotation.x += 0.002;
+                ring1.rotation.z += 0.003;
+                ring2.rotation.z -= 0.002;
+                particleSystem.rotation.y -= 0.001;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+        };
+    </script>
+</body>
+</html>
